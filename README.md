@@ -36,9 +36,9 @@ pip install openai pydub flask werkzeug python-dotenv google-api-python-client g
 # Start the Flask App:
 Run the python code to start the flask server
 # Access the Web App:
-Open your browser and go to http://127.0.0.1:5000/. You’ll see the file upload interface.(Default for the flask applcations)
+Open your browser and go to http://127.0.0.1:5500/. You’ll see the file upload interface.(Default for the flask applcations)
 # Upload Files:
-Click on "Choose File" to upload a meeting recording . The app supports MP4, MP3, and WAV formats.
+Click on "Choose File" to upload a meeting recording . The app supports MP4, MP3, and WAV formats. There the option for folder Id will also appear enter the ID and the summary would be saved in that.
 # Processing:
 After you upload the file, the app will:
 
