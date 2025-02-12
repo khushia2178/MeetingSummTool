@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Summarization Tool</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6600ff, #9966ff);
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .upload-container, .summary-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        .btn-primary {
+            background: #9966ff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #6600ff;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #302e2e;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #bdb3b3;
+            padding: 0.75rem;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #6600ff, #9966ff);
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Meeting Summarization Tool</a>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Input Section -->
+        <div class="upload-container" id="input-section" {% if show_results %}style="display: none;"{% endif %}>
+            <h2 class="text-center mb-4">Upload Meeting Recording</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Choose a file (MP4, MP3, or WAV):</label>
+                    <input class="form-control" type="file" name="file" accept=".mp4,.mp3,.wav" required>
+                </div>
+                <div class="mb-3">
+                    <label for="drive_folder_id" class="form-label">Google Drive Folder ID:</label>
+                    <input class="form-control" type="text" name="drive_folder_id" placeholder="Enter Google Drive Folder ID">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Upload and Summarize</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Output Section -->
+        <div class="summary-container" id="output-section">
+            <h2 class="text-center mb-4">Meeting Summary</h2>
+            <div class="card">
+                <div class="card-header">
+                    <strong>Summary</strong>
+                </div>
+                <div class="card-body">
+                    <p>{{ summary }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <strong>Sentiment Analysis</strong>
+                </div>
+                <div class="card-body">
+                    <p>{{ sentiment }}</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-primary">Upload Another File</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
